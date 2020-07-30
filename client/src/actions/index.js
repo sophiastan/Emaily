@@ -1,14 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER } from './types';
-// All of our "action creators"
-// Action creators are functions that return actions!
-
-// export const changeLogin = shouldBeLoggedIn => {
-//   return {
-//     type: 'change_auth',
-//     payload: shouldBeLoggedIn
-//   };
-// };
+import { FETCH_USER, FETCH_SURVEYS } from './types';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
@@ -28,3 +19,9 @@ export const submitSurvey = (values, history) => async dispatch => {
   history.push('/surveys');
   dispatch({ type: FETCH_USER, paylod: res.data });
 };
+
+export const fetchSurveys = () => async dispatch => {
+  const res = await axios.get('/api/surveys');
+
+  dispatch({ type: FETCH_SURVEYS, payload: res.data });
+}
